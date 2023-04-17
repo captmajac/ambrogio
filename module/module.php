@@ -23,8 +23,9 @@ class Ambrogio extends IPSModule{
 	// public update status
 	public function updateAmbrogioStatus() { 
 		$this->loginCloud();
-		$this->getRobotStatus();
+		$obj = $this->getRobotStatus();
 		
+		return $obj;
 	}
 
 	
@@ -50,6 +51,8 @@ class Ambrogio extends IPSModule{
 		$key = $this->ReadPropertyString("ThingKey");
 		$jsonDataEncoded = '{"state_history":{"command":"alarm.history","params":{"thingKey":"'.$key.'","key":"robot_state","last":"24h"}},"thing_find":{"command":"thing.find","params":{"key":"'.$key.'"}}}';
 		$obj = $this->sendCloudMessage($jsonDataEncoded);
+		
+		return $obj;
 	}
 	
   // send cloud message
