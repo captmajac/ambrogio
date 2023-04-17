@@ -1,0 +1,9 @@
+{
+				"elements":
+				    [
+						{ "name": "ThingKey", "type": "ValidationTextBox", "caption": "ThingKey (IMEI):", "validate":"[0-9A-F]{15}"},
+            { "name": "Cloud Username", "type": "ValidationTextBox", "caption": "Cloud Username:", "validate":"[0-9A-F]{15}"},
+						{ "name": "Cloud Password", "type": "ValidationTextBox", "caption": "Cloud Password:", "validate":"[0-9A-F]{15}"}
+				    
+				    ]
+			}
