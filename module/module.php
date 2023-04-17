@@ -39,9 +39,10 @@ class Ambrogio extends IPSModule{
   
   // send go online message
 	public function goOnline() { 
-	$key = $this->ReadPropertyString("ThingKey");
-    $jsonDataEncoded = '{"0" : {"params" : {"coding" : "SEVEN_BIT", "imei" : "'.$key.'","message" : "UP"},"command" : "sms.send"}}';
-    $obj = sendCloudMessage($jsonDataEncoded);                        
+		// noch prüfen ob login erforderlich, session id vorliegt oder ob der user sich selbst drum kümmern soll
+		$key = $this->ReadPropertyString("ThingKey");
+    		$jsonDataEncoded = '{"0" : {"params" : {"coding" : "SEVEN_BIT", "imei" : "'.$key.'","message" : "UP"},"command" : "sms.send"}}';
+    		$obj = sendCloudMessage($jsonDataEncoded);                        
 	}
 	
    	// send getStatus message
