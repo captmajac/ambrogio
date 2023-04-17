@@ -57,6 +57,7 @@ class Ambrogio extends IPSModule{
 		$pass = $this->ReadPropertyString("Pass");
 		$key = $this->ReadPropertyString("ThingKey");
 		$sessionid = $this->GetBuffer("sessionid");
+		$jsonDataEncoded = $data;
 		
 		
 	//The URL you're sending the request to.
@@ -77,9 +78,9 @@ class Ambrogio extends IPSModule{
         );
 
     // Auth session ID oder user/pass
-    if ($sessionID<>"")
+    if ($sessionid<>"")
     {
-        array_push($customHeaders, "sessionId:".$sessionID);
+        array_push($customHeaders, "sessionId:".$sessionid);
     }
     else
     {
