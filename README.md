@@ -8,6 +8,10 @@ Eine schnelle Implementierung für ein IPSymcon Modul um den Status einen Ambrog
 - Konfiguration 3 Parameter aus der Ambrogio Handy App (IMEI des Roboters, User und Passwort wie in App genutzt. Alle drei Informationen bitte nie öffentlich bekannt geben)
 
 Das Modul prüft nichts automatisch sondern nur auf Anforderung über ein Script mit Funktionsaufruf über AMR_updateAmbrogioStatus(MODUL ID);
+Man bekommt den JSON Antwort String zurück. Wenn man diesen mit einem JSON Decoder und einem VirtualIO verbindet werden automatisch Variablen angelegt.
+
+$Text= AMR_updateAmbrogioStatus(MODUL ID AMBROGIO);<br>
+VIO_PushText (MODUL ID VIRTUAL_IO,  $Text);
 
 <b>Hintergrund Infos:</b>
 
