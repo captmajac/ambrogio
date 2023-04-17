@@ -5,7 +5,7 @@ Eine schnelle Implementierung für ein IPSymcon Modul um den Status einen Ambrog
 
 - Installation über Module
 - Anlegen eines Moduls "Ambrogio"
-- Konfiguration 3 Parameter aus der Ambrogio Handy App (IMEI des Roboters, User und Passwort wie in App genutzt)
+- Konfiguration 3 Parameter aus der Ambrogio Handy App (IMEI des Roboters, User und Passwort wie in App genutzt. Alle drei Informationen bitte nie öffentlich bekannt geben)
 
 Das Modul prüft nichts automatisch sondern nur auf Anforderung über ein Script mit Funktionsaufruf über AMR_updateAmbrogioStatus(MODUL ID);
 
