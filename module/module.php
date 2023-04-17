@@ -108,10 +108,11 @@ class Ambrogio extends IPSModule{
     echo $result."\n";
     $obj = json_decode($result);
 
+/* auf erfolgreich bzw. auth header prüfen
     if ($obj->{'errorCodes'}[0] = -99999 )
     {
         echo "Authentication header Fehler" ; // Login und dann Session ID notwendig.
-    }
+    }*/
 
     return $obj;		
 	                                      
