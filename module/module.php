@@ -6,9 +6,10 @@ class Ambrogio extends IPSModule{
 		// Never delete this line!
 		parent::Create ();
 		$this->RegisterPropertyString ( "User", "" );
-    $this->RegisterPropertyString ( "Pass", "" );
-	$this->RegisterPropertyString ( "ThingKey", "" );
-    $this->RegisterPropertyString ( "SessionID", "" );
+    		$this->RegisterPropertyString ( "Pass", "" );
+		$this->RegisterPropertyString ( "ThingKey", "" );
+    		//$this->RegisterPropertyString ( "SessionID", "" );
+		$this->SetBuffer("sessionid", "");
 		
 	}
 	
@@ -19,23 +20,32 @@ class Ambrogio extends IPSModule{
 		
 	}
 
+	// public update status
+	public function updateAmbrogioStatus($data) { 
+		loginCloud();
+		getRobotStatus();
+		
+	}
 
 	
 	// login cloud
-	private function loginCloud($data) { 
+	private function loginCloud() { 
 		$jsonDataEncoded = '{"auth":{"command":"api.authenticate","params":{"appId":"3c1Pt1We9dT3qBAlL7nxAcDERC82","thingKey":"3c1Pt1We9dT3qBAlL7nxAcDERC82","appToken":"DJMYYngGNEit40vA"}}}';
-		$obj = sendCloudMessage($jsonDataEncoded);                              
+		$obj = sendCloudMessage($jsonDataEncoded);  
+		// store sessionid 
+		$this->SetBuffer("sessionid", $obj->{'auth'}->{'params'}->{'sessionId'});
+		
 	}
   
   // send go online message
-	private function goOnline($data) { 
+	public function goOnline() { 
 	$key = $this->ReadPropertyString("ThingKey");
     $jsonDataEncoded = '{"0" : {"params" : {"coding" : "SEVEN_BIT", "imei" : "'.$key.'","message" : "UP"},"command" : "sms.send"}}';
     $obj = sendCloudMessage($jsonDataEncoded);                        
 	}
 	
    	// send getStatus message
-	private function getRobotStatus($data) {  
+	private function getRobotStatus() {  
 		$key = $this->ReadPropertyString("ThingKey");
 		$jsonDataEncoded = '{"state_history":{"command":"alarm.history","params":{"thingKey":"'.$key.'","key":"robot_state","last":"24h"}},"thing_find":{"command":"thing.find","params":{"key":"'.$key.'"}}}';
 		$obj = sendCloudMessage($jsonDataEncoded);
@@ -46,7 +56,7 @@ class Ambrogio extends IPSModule{
 		$user = $this->ReadPropertyString("User");
 		$pass = $this->ReadPropertyString("Pass");
 		$key = $this->ReadPropertyString("ThingKey");
-		$sessionid = $this->ReadPropertyString("SessionID");
+		$sessionid = $this->GetBuffer("sessionid");
 		
 		
 	//The URL you're sending the request to.
