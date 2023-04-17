@@ -23,16 +23,17 @@ class Ambrogio extends IPSModule{
 	// public update status
 	public function updateAmbrogioStatus() { 
 		$this->loginCloud();
-		$obj = $this->getRobotStatus();
+		$result = $this->getRobotStatus();
 		
-		return $obj;
+		return $result;
 	}
 
 	
 	// login cloud
 	private function loginCloud() { 
 		$jsonDataEncoded = '{"auth":{"command":"api.authenticate","params":{"appId":"3c1Pt1We9dT3qBAlL7nxAcDERC82","thingKey":"3c1Pt1We9dT3qBAlL7nxAcDERC82","appToken":"DJMYYngGNEit40vA"}}}';
-		$obj = $this->sendCloudMessage($jsonDataEncoded);  
+		$result = $this->sendCloudMessage($jsonDataEncoded);  
+		$obj = json_decode($result)
 		// store sessionid 
 		$this->SetBuffer("sessionid", $obj->{'auth'}->{'params'}->{'sessionId'});
 		
@@ -43,7 +44,8 @@ class Ambrogio extends IPSModule{
 		// noch prüfen ob login erforderlich, session id vorliegt oder ob der user sich selbst drum kümmern soll
 		$key = $this->ReadPropertyString("ThingKey");
     		$jsonDataEncoded = '{"0" : {"params" : {"coding" : "SEVEN_BIT", "imei" : "'.$key.'","message" : "UP"},"command" : "sms.send"}}';
-    		$obj = sendCloudMessage($jsonDataEncoded);                        
+    		$result = sendCloudMessage($jsonDataEncoded);  
+		return $result;
 	}
 	
    	// send getStatus message
@@ -110,7 +112,7 @@ class Ambrogio extends IPSModule{
     curl_close($ch);
 
     echo $result."\n";
-    $obj = json_decode($result);
+    //$obj = json_decode($result);
 
 /* auf erfolgreich bzw. auth header prüfen
     if ($obj->{'errorCodes'}[0] = -99999 )
@@ -118,7 +120,7 @@ class Ambrogio extends IPSModule{
         echo "Authentication header Fehler" ; // Login und dann Session ID notwendig.
     }*/
 
-    return $obj;		
+    return $result;		
 	                                      
 	}
 
