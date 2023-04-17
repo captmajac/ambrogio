@@ -1,5 +1,5 @@
 <?php
-class Ambrogio {
+class Ambrogio extends IPSModule{
 	
 	// erstellung
 	public function Create() {
