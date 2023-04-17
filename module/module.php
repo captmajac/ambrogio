@@ -22,8 +22,8 @@ class Ambrogio extends IPSModule{
 
 	// public update status
 	public function updateAmbrogioStatus() { 
-		loginCloud();
-		getRobotStatus();
+		$this->loginCloud();
+		$this->getRobotStatus();
 		
 	}
 
@@ -31,7 +31,7 @@ class Ambrogio extends IPSModule{
 	// login cloud
 	private function loginCloud() { 
 		$jsonDataEncoded = '{"auth":{"command":"api.authenticate","params":{"appId":"3c1Pt1We9dT3qBAlL7nxAcDERC82","thingKey":"3c1Pt1We9dT3qBAlL7nxAcDERC82","appToken":"DJMYYngGNEit40vA"}}}';
-		$obj = sendCloudMessage($jsonDataEncoded);  
+		$obj = $this->sendCloudMessage($jsonDataEncoded);  
 		// store sessionid 
 		$this->SetBuffer("sessionid", $obj->{'auth'}->{'params'}->{'sessionId'});
 		
@@ -48,7 +48,7 @@ class Ambrogio extends IPSModule{
 	private function getRobotStatus() {  
 		$key = $this->ReadPropertyString("ThingKey");
 		$jsonDataEncoded = '{"state_history":{"command":"alarm.history","params":{"thingKey":"'.$key.'","key":"robot_state","last":"24h"}},"thing_find":{"command":"thing.find","params":{"key":"'.$key.'"}}}';
-		$obj = sendCloudMessage($jsonDataEncoded);
+		$obj = $this->sendCloudMessage($jsonDataEncoded);
 	}
 	
   // send cloud message
