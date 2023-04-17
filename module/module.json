@@ -2,10 +2,14 @@
 	"id": "{0768F5F7-7302-1A72-7008-4738861C70D0}",
 	"name": "Ambrogio Robot",
 	"type": 3,
-	"vendor": "CaptMajac",
+	"vendor": "Ambrogio",
 	"aliases": 
 	[
 		"Ambrogio"
 	],
-	"prefix": "GenericEEP"
+	"url": "https://github.com/captmajac/ambrogio",
+    	"parentRequirements": [],
+    	"childRequirements": [],
+    	"implemented": [],
+    	"prefix": "AMR"
 }
