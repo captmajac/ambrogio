@@ -35,7 +35,7 @@ class Ambrogio extends IPSModule{
 	}
 	
    	// send getStatus message
-	private function getStatus($data) {  
+	private function getRobotStatus($data) {  
 		$key = $this->ReadPropertyString("ThingKey");
 		$jsonDataEncoded = '{"state_history":{"command":"alarm.history","params":{"thingKey":"'.$key.'","key":"robot_state","last":"24h"}},"thing_find":{"command":"thing.find","params":{"key":"'.$key.'"}}}';
 		$obj = sendCloudMessage($jsonDataEncoded);
