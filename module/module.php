@@ -21,7 +21,7 @@ class Ambrogio extends IPSModule{
 	}
 
 	// public update status
-	public function updateAmbrogioStatus($data) { 
+	public function updateAmbrogioStatus() { 
 		loginCloud();
 		getRobotStatus();
 		
