@@ -31,7 +31,7 @@ class Ambrogio {
 	private function goOnline($data) { 
 	$key = $this->ReadPropertyString("ThingKey");
     $jsonDataEncoded = '{"0" : {"params" : {"coding" : "SEVEN_BIT", "imei" : "'.$key.'","message" : "UP"},"command" : "sms.send"}}';
-    obj = sendCloudMessage($jsonDataEncoded);                        
+    $obj = sendCloudMessage($jsonDataEncoded);                        
 	}
 	
    	// send getStatus message
