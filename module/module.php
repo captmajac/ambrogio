@@ -44,7 +44,7 @@ class Ambrogio extends IPSModule{
 		// noch prüfen ob login erforderlich, session id vorliegt oder ob der user sich selbst drum kümmern soll
 		$key = $this->ReadPropertyString("ThingKey");
     		$jsonDataEncoded = '{"0" : {"params" : {"coding" : "SEVEN_BIT", "imei" : "'.$key.'","message" : "UP"},"command" : "sms.send"}}';
-    		$result = sendCloudMessage($jsonDataEncoded);  
+    		$result = $this->sendCloudMessage($jsonDataEncoded);  
 		return $result;
 	}
 	
