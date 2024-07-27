@@ -10,6 +10,10 @@ class Ambrogio extends IPSModule{
 		$this->RegisterPropertyString ( "ThingKey", "" );
     		//$this->RegisterPropertyString ( "SessionID", "" );
 		$this->SetBuffer("sessionid", "");
+
+		$Module = json_decode(file_get_contents(__DIR__ . "/module.json") , true) ["prefix"];
+		$this->RegisterTimer("UpdateTimer",0,$Module."_TimerEvent(\$_IPS['TARGET']);");  
+
 		
 	}
 	
@@ -17,7 +21,19 @@ class Ambrogio extends IPSModule{
 	public function ApplyChanges() {
 		// Never delete this line!
 		parent::ApplyChanges ();
-		
+
+		$this->RegisterVariableBoolean("CloudConnected", "Cloud Verbindung", "", 10 );
+		$this->RegisterVariableString("LastSeen", "Letzter Kontakt", "", 20 );
+		$this->RegisterVariableInteger("State", "Status", "", 30 );
+		$this->RegisterVariableString("Message", "Meldung", "", 40 );
+		$this->RegisterVariableFloat("lat", "lat", "", 50 );
+		$this->RegisterVariableFloat("lgn", "lgn", "", 60 );
+		$this->RegisterVariableString("Map", "Karte", "~HTMLBox", 70 );
+
+		// update timer
+		$Interval = 5*60 * 1000; 		// starttimer weil getinstance in apply die instanz nicht erstellen lässt
+		$this->SetTimerInterval("UpdateTimer", $Interval);		// $this->ReadPropertyInteger("Interval")
+
 	}
 
 	// public update status
@@ -138,6 +154,15 @@ class Ambrogio extends IPSModule{
 		}
 	}
 	
-	
+	// timer aufruf
+	public function TimerEvent() {
+		$this->updateAmbrogioStatus();
+
+		// neu setzen
+		$Interval = 5 * 60 * 1000; 
+		$this->SetTimerInterval("UpdateTimer", $Interval);		// $this->ReadPropertyInteger("Interval")
+		
+	} 
+
 }
 ?>
