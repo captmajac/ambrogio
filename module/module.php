@@ -78,8 +78,8 @@ class Ambrogio extends IPSModule
         return $result;
     }
 
-    // public update status
-    private function decodeAmbrogioStatus(string $json)
+    // public update variablen
+    public function decodeAmbrogioStatus(string $json)
     {
         $result = json_decode($json);
         //cloud state
