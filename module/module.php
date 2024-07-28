@@ -12,7 +12,7 @@ class Ambrogio extends IPSModule
         //$this->RegisterPropertyString ( "SessionID", "" );
         $this->SetBuffer("sessionid", "");
         $this->RegisterPropertyString("Interval", "300");
-        $this->RegisterPropertyString("MapID", "");
+        $this->RegisterPropertyInteger("MapID", "");
 
         $Module = json_decode(
             file_get_contents(__DIR__ . "/module.json"),
@@ -58,7 +58,7 @@ class Ambrogio extends IPSModule
         }
         $this->SetTimerInterval("UpdateTimer", $Interval);
 
-	    echo ($this->ReadPropertyString("MapID"));
+	//    echo ($this->ReadPropertyString("MapID"));
     	if ($this->ReadPropertyString("MapID") != 0)
 	{
 		IPS_SetHidden($this->GetIDForIdent("Map"),false);
