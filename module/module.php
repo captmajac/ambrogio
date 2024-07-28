@@ -112,6 +112,11 @@ class Ambrogio extends IPSModule
         SetValue($this->GetIDForIdent("Message"), $msg);
         SetValue($this->GetIDForIdent("lat"), $lat);
         SetValue($this->GetIDForIdent("lgn"), $lgn);
+
+				if ($this->ReadPropertyString("MapID") != "")
+				{
+						$this->updateMap();
+				}
     }
 
     // login cloud
@@ -269,8 +274,8 @@ class Ambrogio extends IPSModule
         $map["restrict_points"] = false; // Anzahl der Punkte beschränken auf die zulässige Größe der URL
         $map["skip_points"] = 1; // nur jeden x'ten Punkt ausgeben, GoogleMap interpoliert
 
-        $lat = 52.37022400954993; // ? wofür
-        $lng = 9.965405454556125;
+        $lat = GetValueFloat($this->GetIDForIdent("lat")); // static 52.37022400954993;
+        $lng = GetValueFloat($this->GetIDForIdent("lgn")); // static 9.965405454556125;
 
         $center = [["lat" => $lat, "lng" => $lng]];
 
@@ -299,12 +304,6 @@ class Ambrogio extends IPSModule
             "points" => $marker_points,
         ];
 
-        /*
-$marker_points = [];
-$marker_points[0] = $points[1];
-$marker_points[1] = $points[2];
-*/
-
         $markers[] = [
             "color" => "0x0000ff",
             "size" => "tiny",
@@ -321,7 +320,7 @@ $marker_points[1] = $points[2];
         ];
 
         $map["paths"] = $paths;
-        echo $this->GetIDForIdent("Map");
+        //echo $this->GetIDForIdent("Map");
         $url = GoogleMaps_GenerateStaticMap(
             $this->ReadPropertyString("MapID"),
             json_encode($map)
