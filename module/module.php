@@ -30,7 +30,7 @@ class Ambrogio extends IPSModule
 								$this->RegisterVariableBoolean("CloudConnected", "Cloud Verbindung", "Ambrogio.Online", 10);
 								$this->RegisterVariableString("LastSeen", "Letzter Kontakt", "", 20);
 								$this->RegisterVariableInteger("State", "Status", "Ambrogio.State", 30);
-								$this->RegisterVariableString("Message", "Meldung", "Ambrogio.Msg", 40);
+								$this->RegisterVariableInteger("Message", "Meldung", "Ambrogio.Msg", 40);
 								$this->RegisterVariableFloat("lat", "lat", "", 50);
 								$this->RegisterVariableFloat("lgn", "lgn", "", 60);
 								$this->RegisterVariableString("Map", "Karte", "~HTMLBox", 70);
