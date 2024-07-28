@@ -12,7 +12,7 @@ class Ambrogio extends IPSModule
 								$this->RegisterPropertyString("ThingKey", "");
 								//$this->RegisterPropertyString ( "SessionID", "" );
 								$this->SetBuffer("sessionid", "");
-								$this->RegisterPropertyInteger("Interval", "300");
+								$this->RegisterPropertyString("Interval", "300");
 
 								$Module = json_decode(file_get_contents(__DIR__ . "/module.json"), true) ["prefix"];
 								$this->RegisterTimer("UpdateTimer", 0, $Module . "_TimerEvent(\$_IPS['TARGET']);");
