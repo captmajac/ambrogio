@@ -110,8 +110,8 @@ class Ambrogio extends IPSModule
             $lng = $result->thing_find->params->loc->lng;
         }
 
-	print_r ( $result->thing_find->params->loc->lat );
-	print_r ( $result->thing_find->params->loc->lng );
+	//print_r ( $result->thing_find->params->loc->lat );
+	//print_r ( $result->thing_find->params->loc->lng );
 			
         // set vars
         SetValue($this->GetIDForIdent("CloudConnected"), $online);
@@ -126,10 +126,10 @@ class Ambrogio extends IPSModule
         SetValue($this->GetIDForIdent("lat"), $lat);
         SetValue($this->GetIDForIdent("lng"), $lng);
 
-				if ($this->ReadPropertyString("MapID") != "")
-				{
-						$this->updateMap();
-				}
+	if ($this->ReadPropertyString("MapID") != "")
+	{
+		$this->updateMap();
+	}
     }
 
     // login cloud
@@ -156,7 +156,8 @@ class Ambrogio extends IPSModule
             $key .
             '","message" : "UP"},"command" : "sms.send"}}';
         $result = $this->sendCloudMessage($jsonDataEncoded);
-
+	    
+	IPS_Sleep(2 * 1000);
 	$returnUpdate = $this->updateAmbrogioStatus();
         $this->decodeAmbrogioStatus($returnUpdate);
 	    
@@ -261,7 +262,7 @@ class Ambrogio extends IPSModule
         $return = $this->updateAmbrogioStatus();
         $this->decodeAmbrogioStatus($return);
 
-        echo "timer ambrogio";
+        //echo "timer ambrogio";
 
         // neu setzen
         $Interval = (int) $this->ReadPropertyString("Interval") * 1000;
