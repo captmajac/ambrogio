@@ -235,7 +235,7 @@ class Ambrogio extends IPSModule
 								$return = $this->updateAmbrogioStatus();
 								$this->decodeAmbrogioStatus($return);
 
-								echo "timer";
+								echo "timer ambrogio";
 
 								// neu setzen
 								$Interval = (int) $this->ReadPropertyInteger("Interval") * 1000 ;
