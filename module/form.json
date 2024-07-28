@@ -3,7 +3,7 @@
 	[
 		{ "name": "ThingKey", "type": "ValidationTextBox", "caption": "ThingKey (IMEI):", "validate":"[0-9A-F]{15}"},
 		{ "name": "User", "type": "ValidationTextBox", "caption": "Cloud Username:"},
-		{ "name": "Pass", "type": "ValidationTextBox", "caption": "Cloud Password:"}
-		{ "name": "Interval", "type": "ValidationTextBox", "caption": "Update Zyklus:"}
+		{ "name": "Pass", "type": "ValidationTextBox", "caption": "Cloud Password:"},
+		{ "name": "Interval", "type": "ValidationTextBox", "caption": "Update Zyklus (Sek):"}
 	]
 }
