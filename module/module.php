@@ -36,10 +36,10 @@ class Ambrogio extends IPSModule
 								$this->RegisterVariableString("Map", "Karte", "~HTMLBox", 70);
 
 								// update timer
-								@$Interval = (int) $this->ReadPropertyInteger("Interval") * 1000 ;
+								@$Interval = (int) $this->ReadPropertyString("Interval") * 1000 ;
 								if ($Interval == 0)
 										$Interval = 5 * 60 * 1000;
-								$this->SetTimerInterval("UpdateTimer", $Interval); // $this->ReadPropertyInteger("Interval")
+								$this->SetTimerInterval("UpdateTimer", $Interval); 
 								
 				}
 
@@ -101,10 +101,7 @@ class Ambrogio extends IPSModule
 												->robot_state->lgn;
 
 								// set vars
-								$dt = new DateTime($online);
-								$tz = new DateTimeZone('Europe/Berlin'); 
-								$dt->setTimezone($tz);
-								SetValue($this->GetIDForIdent("CloudConnected"), $dt->format('d.m.Y H:i:s'));
+								SetValue($this->GetIDForIdent("CloudConnected"), $online);
 
 								$dt = new DateTime($since);
 								$tz = new DateTimeZone('Europe/Berlin'); 
@@ -238,10 +235,10 @@ class Ambrogio extends IPSModule
 								echo "timer ambrogio";
 
 								// neu setzen
-								$Interval = (int) $this->ReadPropertyInteger("Interval") * 1000 ;
+								$Interval = (int) $this->ReadPropertyString("Interval") * 1000 ;
 								if ($Interval == 0)
 										$Interval = 5 * 60 * 1000;
-								$this->SetTimerInterval("UpdateTimer", $Interval); // $this->ReadPropertyInteger("Interval")
+								$this->SetTimerInterval("UpdateTimer", $Interval); 
 								
 				}
 
