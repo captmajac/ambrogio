@@ -30,7 +30,7 @@ class Ambrogio extends IPSModule
 								$this->RegisterVariableBoolean("CloudConnected", "Cloud Verbindung", "Ambrogio.Online", 10);
 								$this->RegisterVariableString("LastSeen", "Letzter Kontakt", "", 20);
 								$this->RegisterVariableInteger("State", "Status", "Ambrogio.State", 30);
-								$this->RegisterVariableString("Message", "Meldung", "", 40);
+								$this->RegisterVariableString("Message", "Meldung", "Ambrogio.Msg", 40);
 								$this->RegisterVariableFloat("lat", "lat", "", 50);
 								$this->RegisterVariableFloat("lgn", "lgn", "", 60);
 								$this->RegisterVariableString("Map", "Karte", "~HTMLBox", 70);
@@ -251,7 +251,7 @@ class Ambrogio extends IPSModule
         {
             IPS_CreateVariableProfile("Ambrogio.Online", 0);
             IPS_SetVariableProfileText("Ambrogio.Online", "", "");
-            IPS_SetVariableProfileIcon("Ambrogio.Online", "Information");
+            //IPS_SetVariableProfileIcon("Ambrogio.Online", "Information");
             IPS_SetVariableProfileAssociation("Ambrogio.Online", 0, "nicht verbunden", "", 0xFF2600); 
             IPS_SetVariableProfileAssociation("Ambrogio.Online", 1, "online", "", 0x00F900);
 
@@ -260,12 +260,23 @@ class Ambrogio extends IPSModule
         {
             IPS_CreateVariableProfile("Ambrogio.State", 1);
             IPS_SetVariableProfileText("Ambrogio.State", "", "");
-            IPS_SetVariableProfileIcon("Ambrogio.State", "Status");
+            //IPS_SetVariableProfileIcon("Ambrogio.State", "Information");
             IPS_SetVariableProfileAssociation("Ambrogio.State", 0, "0", "", -1); 
             IPS_SetVariableProfileAssociation("Ambrogio.State", 1, "Ladung", "", -1);
 						IPS_SetVariableProfileAssociation("Ambrogio.State", 2, "Mähvorgang", "", -1);
 						IPS_SetVariableProfileAssociation("Ambrogio.State", 4, "Fehler", "", -1);
         }
+				if (!IPS_VariableProfileExists("Ambrogio.Msg"))
+        {
+            IPS_CreateVariableProfile("Ambrogio.Msg", 1);
+            IPS_SetVariableProfileText("Ambrogio.Msg", "", "");
+            //IPS_SetVariableProfileIcon("Ambrogio.Msg", "Information");
+            IPS_SetVariableProfileAssociation("Ambrogio.Msg", 5, "Blockiert", "", -1); 
+            IPS_SetVariableProfileAssociation("Ambrogio.Msg", 51, "Leere Batterie", "", -1);
+						IPS_SetVariableProfileAssociation("Ambrogio.Msg", 9, "Äußerer Umfang", "", -1);
+						IPS_SetVariableProfileAssociation("Ambrogio.Msg", 6, "Hindernis", "", -1);
+        }
+			
     }
 
 }
