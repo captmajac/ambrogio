@@ -87,7 +87,7 @@ class Ambrogio extends IPSModule
         // message, muss nicht immer vorkommen
         @$msg = $result->thing_find->params->alarms->robot_state->msg;
         // state
-        $state = $result->thing_find->params->alarms->connection_state->state;
+        $state = $result->thing_find->params->alarms->robot_state->state;
         // since
         $since = $result->thing_find->params->alarms->robot_state->since;
         // lat, lgn
