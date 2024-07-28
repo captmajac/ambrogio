@@ -84,8 +84,8 @@ class Ambrogio extends IPSModule
         $result = json_decode($json);
         //cloud state
         $online = $result->thing_find->params->connected;
-        // message
-        $msg = $result->thing_find->params->alarms->robot_state->msg;
+        // message, muss nicht immer vorkommen
+        @$msg = $result->thing_find->params->alarms->robot_state->msg;
         // state
         $state = $result->thing_find->params->alarms->connection_state->state;
         // since
@@ -110,6 +110,9 @@ class Ambrogio extends IPSModule
             $lgn = $jar->thing_find->params->loc->lgn;
         }
 
+				$lat = $jar->thing_find->params->loc->lat;
+			$lgn = $jar->thing_find->params->loc->lgn;
+			
         // set vars
         SetValue($this->GetIDForIdent("CloudConnected"), $online);
 
