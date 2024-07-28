@@ -12,7 +12,7 @@ class Ambrogio extends IPSModule
 								$this->RegisterPropertyString("ThingKey", "");
 								//$this->RegisterPropertyString ( "SessionID", "" );
 								$this->SetBuffer("sessionid", "");
-								$this->RegisterPropertyInteger("Interval", "300");
+								$this->RegisterPropertyString("Interval", "300");
 
 								$Module = json_decode(file_get_contents(__DIR__ . "/module.json"), true) ["prefix"];
 								$this->RegisterTimer("UpdateTimer", 0, $Module . "_TimerEvent(\$_IPS['TARGET']);");
@@ -36,7 +36,7 @@ class Ambrogio extends IPSModule
 								$this->RegisterVariableString("Map", "Karte", "~HTMLBox", 70);
 
 								// update timer
-								@$Interval = $this->ReadPropertyInteger("Interval") * 1000 ;
+								@$Interval = (int) $this->ReadPropertyInteger("Interval") * 1000 ;
 								if ($Interval == 0)
 										$Interval = 5 * 60 * 1000;
 								$this->SetTimerInterval("UpdateTimer", $Interval); // $this->ReadPropertyInteger("Interval")
@@ -238,7 +238,7 @@ class Ambrogio extends IPSModule
 								echo "timer";
 
 								// neu setzen
-								$Interval = $this->ReadPropertyInteger("Interval") * 1000 ;
+								$Interval = (int) $this->ReadPropertyInteger("Interval") * 1000 ;
 								if ($Interval == 0)
 										$Interval = 5 * 60 * 1000;
 								$this->SetTimerInterval("UpdateTimer", $Interval); // $this->ReadPropertyInteger("Interval")
