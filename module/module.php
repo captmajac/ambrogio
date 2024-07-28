@@ -13,6 +13,7 @@ class Ambrogio extends IPSModule
 								//$this->RegisterPropertyString ( "SessionID", "" );
 								$this->SetBuffer("sessionid", "");
 								$this->RegisterPropertyString("Interval", "300");
+								$this->RegisterPropertyString("MapID", "");
 
 								$Module = json_decode(file_get_contents(__DIR__ . "/module.json"), true) ["prefix"];
 								$this->RegisterTimer("UpdateTimer", 0, $Module . "_TimerEvent(\$_IPS['TARGET']);");
@@ -33,7 +34,7 @@ class Ambrogio extends IPSModule
 								$this->RegisterVariableInteger("Message", "Meldung", "Ambrogio.Msg", 40);
 								$this->RegisterVariableFloat("lat", "lat", "", 50);
 								$this->RegisterVariableFloat("lgn", "lgn", "", 60);
-								$this->RegisterVariableString("Map", "Karte", "~HTMLBox", 70);
+								$this->RegisterVariableString("Map", "Letzte Position", "~HTMLBox", 70);
 
 								// update timer
 								@$Interval = (int) $this->ReadPropertyString("Interval") * 1000 ;
@@ -242,6 +243,91 @@ class Ambrogio extends IPSModule
 								
 				}
 
+	  private function updateMap()
+    {
+			declare(strict_types=1);
+// koordinaten aus robot_state
+$lat=this->ReadPropertyFloat("lat");
+$lng=this->ReadPropertyFloat("lgn");
+
+$points = [
+    ['lat' => $lat, 'lng' => $lng]
+];
+
+// allgemeine Angaben zur Karte
+$map = [];
+
+$map['zoom'] = 20;
+$map['size'] = '896x384';
+$map['scale'] = 1;
+$map['maptype'] = 'satellite';
+
+$map['restrict_points'] = false; // Anzahl der Punkte beschränken auf die zulässige Größe der URL
+$map['skip_points'] = 1; // nur jeden x'ten Punkt ausgeben, GoogleMap interpoliert
+
+$lat=52.37022400954993; // ? wofür
+$lng=9.965405454556125;
+			
+$center = [
+    ['lat' => $lat, 'lng' => $lng]
+];
+
+
+// Mittelpunkt der Karte
+$map['center'] = $center[0];
+
+$styles = [];
+$styles[] = [
+    'feature'   => 'road.local',
+    'color'     => '0xff00ff',
+];
+$styles[] = [
+    'feature'   => 'poi.park',
+    'color'     => '0x00ff00',
+];
+$map['styles'] = $styles;
+
+$markers = [];
+
+$marker_points = [];
+$marker_points[0] = $points[0];
+
+$markers[] = [
+    'color'     => 'green',
+    'label'		   => 'P',
+    'points'    => $marker_points,
+];
+
+/*
+$marker_points = [];
+$marker_points[0] = $points[1];
+$marker_points[1] = $points[2];
+*/
+
+$markers[] = [
+    'color'     => '0x0000ff',
+    'size'      => 'tiny',
+    'points'    => $marker_points,
+];
+
+$map['markers'] = $markers;
+
+$paths = [];
+$paths[] = [
+    'color'     => '0xff0000ff',       // 0xhhhhhhoo oo=opacity
+    'weight'    => 2,
+    'points'    => $points,
+];
+
+$map['paths'] = $paths;
+
+$url = GoogleMaps_GenerateStaticMap($this->ReadPropertyString("MapID"), json_encode($map));
+
+$html = '<img width="1024", height="500" src="' . $url . '" />';
+
+SetValue($this->GetIDForIdent("State"), $html);
+		}
+	
 	  private function CreateVarProfileModus()
     {
         if (!IPS_VariableProfileExists("Ambrogio.Online"))
