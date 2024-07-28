@@ -245,7 +245,7 @@ class Ambrogio extends IPSModule
 
 	  private function updateMap()
     {
-			declare(strict_types=1);
+			//declare(strict_types=1);
 // koordinaten aus robot_state
 $lat=this->ReadPropertyFloat("lat");
 $lng=this->ReadPropertyFloat("lgn");
