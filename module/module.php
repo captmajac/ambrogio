@@ -47,6 +47,8 @@ class Ambrogio extends IPSModule{
 	// public update status
 	private function decodeAmbrogioStatus(String $json) { 
 		$result = json_decode($json);
+		//cloud state
+		$online = $result-->thing_find->params->connected
 		// message
 		$msg = $result->thing_find->params->alarms->robot_state->msg;
 		// state
@@ -60,7 +62,14 @@ class Ambrogio extends IPSModule{
     			$lat = $jar->thing_find->params->alarms->robot_state->lat;
 		if (property_exists($result->thing_find->params->alarms->robot_state,"lgn") == true)
     			$lgn = $jar->thing_find->params->alarms->robot_state->lgn;
-		
+
+		// set vars
+		SetValue($this->GetIDForIdent("CloudConnected"), $online);
+		SetValue($this->GetIDForIdent("LastSeen"), $since);
+		SetValue($this->GetIDForIdent("State"), $state);
+		SetValue($this->GetIDForIdent("Message"), $msg);
+		SetValue($this->GetIDForIdent("lat"), $lat);
+		SetValue($this->GetIDForIdent("lgn"), $lgn);
 		
 	}	
 	
