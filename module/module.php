@@ -53,7 +53,7 @@ class Ambrogio extends IPSModule
 								$result = json_decode($json);
 								//cloud state
 								$online = $result-- > thing_find
-												->params->connected
+												->params->connected;
 								// message
 								$msg = $result
 												->thing_find
@@ -66,14 +66,14 @@ class Ambrogio extends IPSModule
 												->params
 												->alarms
 												->connection_state
-												->state);
+												->state;
 								// since
 								$since = $result
 												->thing_find
 												->params
 												->alarms
 												->robot_state
-												->since);
+												->since;
 								// lat, lgn
 								$lat = 0; // todo: alten wert holen
 								$lgn = 0; // todo: alten wert holen
