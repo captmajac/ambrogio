@@ -17,6 +17,8 @@ class Ambrogio extends IPSModule
 								$Module = json_decode(file_get_contents(__DIR__ . "/module.json"), true) ["prefix"];
 								$this->RegisterTimer("UpdateTimer", 0, $Module . "_TimerEvent(\$_IPS['TARGET']);");
 
+								$this->CreateVarProfileModus();    
+
 				}
 
 				// changes der instanz
@@ -25,9 +27,9 @@ class Ambrogio extends IPSModule
 								// Never delete this line!
 								parent::ApplyChanges();
 
-								$this->RegisterVariableBoolean("CloudConnected", "Cloud Verbindung", "", 10);
+								$this->RegisterVariableBoolean("CloudConnected", "Cloud Verbindung", "Ambrogio.Online", 10);
 								$this->RegisterVariableString("LastSeen", "Letzter Kontakt", "", 20);
-								$this->RegisterVariableInteger("State", "Status", "", 30);
+								$this->RegisterVariableInteger("State", "Status", "Ambrogio.State", 30);
 								$this->RegisterVariableString("Message", "Meldung", "", 40);
 								$this->RegisterVariableFloat("lat", "lat", "", 50);
 								$this->RegisterVariableFloat("lgn", "lgn", "", 60);
@@ -99,8 +101,16 @@ class Ambrogio extends IPSModule
 												->robot_state->lgn;
 
 								// set vars
-								SetValue($this->GetIDForIdent("CloudConnected"), $online);
-								SetValue($this->GetIDForIdent("LastSeen"), $since);
+								$dt = new DateTime($online);
+								$tz = new DateTimeZone('Europe/Berlin'); 
+								$dt->setTimezone($tz);
+								SetValue($this->GetIDForIdent("CloudConnected"), $dt->format('d.m.Y H:i:s'));
+
+								$dt = new DateTime($since);
+								$tz = new DateTimeZone('Europe/Berlin'); 
+								$dt->setTimezone($tz);					
+								SetValue($this->GetIDForIdent("LastSeen"), $dt->format('d.m.Y H:i:s'));
+					
 								SetValue($this->GetIDForIdent("State"), $state);
 								SetValue($this->GetIDForIdent("Message"), $msg);
 								SetValue($this->GetIDForIdent("lat"), $lat);
@@ -234,6 +244,29 @@ class Ambrogio extends IPSModule
 								$this->SetTimerInterval("UpdateTimer", $Interval); // $this->ReadPropertyInteger("Interval")
 								
 				}
+
+	  private function CreateVarProfileModus()
+    {
+        if (!IPS_VariableProfileExists("Ambrogio.Online"))
+        {
+            IPS_CreateVariableProfile("Ambrogio.Online", 0);
+            IPS_SetVariableProfileText("Ambrogio.Online", "", "");
+            IPS_SetVariableProfileIcon("Ambrogio.Online", "Information");
+            IPS_SetVariableProfileAssociation("Ambrogio.Online", 0, "nicht verbunden", "", 0xFF2600); 
+            IPS_SetVariableProfileAssociation("Ambrogio.Online", 1, "online", "", 0x00F900);
+
+        }
+			  if (!IPS_VariableProfileExists("Ambrogio.State"))
+        {
+            IPS_CreateVariableProfile("Ambrogio.State", 1);
+            IPS_SetVariableProfileText("Ambrogio.State", "", "");
+            IPS_SetVariableProfileIcon("Ambrogio.State", "Status");
+            IPS_SetVariableProfileAssociation("Ambrogio.State", 0, "0", "", -1); 
+            IPS_SetVariableProfileAssociation("Ambrogio.State", 1, "Ladung", "", -1);
+						IPS_SetVariableProfileAssociation("Ambrogio.State", 2, "Mähvorgang", "", -1);
+						IPS_SetVariableProfileAssociation("Ambrogio.State", 4, "Fehler", "", -1);
+        }
+    }
 
 }
 ?>
