@@ -44,6 +44,25 @@ class Ambrogio extends IPSModule{
 		return $result;
 	}
 
+	// public update status
+	private function decodeAmbrogioStatus(String $json) { 
+		$result = json_decode($json);
+		// message
+		$msg = $result->thing_find->params->alarms->robot_state->msg;
+		// state
+		$state = $result->thing_find->params->alarms->connection_state->state);
+		// since
+		$since = $result->thing_find->params->alarms->robot_state->since);
+		// lat, lgn
+		$lat = 0; // todo: alten wert holen
+		$lgn = 0; // todo: alten wert holen
+		if (property_exists($result->thing_find->params->alarms->robot_state,"lat") == true)
+    			$lat = $jar->thing_find->params->alarms->robot_state->lat;
+		if (property_exists($result->thing_find->params->alarms->robot_state,"lgn") == true)
+    			$lgn = $jar->thing_find->params->alarms->robot_state->lgn;
+		
+		
+	}	
 	
 	// login cloud
 	private function loginCloud() { 
