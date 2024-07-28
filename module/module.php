@@ -272,7 +272,7 @@ class Ambrogio extends IPSModule
         //declare(strict_types=1);
         // koordinaten aus robot_state
         $lat = GetValueFloat($this->GetIDForIdent("lat"));
-        $lng = GetValueFloat($this->GetIDForIdent("lgn"));
+        $lng = GetValueFloat($this->GetIDForIdent("lng"));
 
         $points = [["lat" => $lat, "lng" => $lng]];
 
@@ -288,7 +288,7 @@ class Ambrogio extends IPSModule
         $map["skip_points"] = 1; // nur jeden x'ten Punkt ausgeben, GoogleMap interpoliert
 
         $lat = GetValueFloat($this->GetIDForIdent("lat")); // static 52.37022400954993;
-        $lng = GetValueFloat($this->GetIDForIdent("lgn")); // static 9.965405454556125;
+        $lng = GetValueFloat($this->GetIDForIdent("lng")); // static 9.965405454556125;
 
         $center = [["lat" => $lat, "lng" => $lng]];
 
