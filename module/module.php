@@ -243,7 +243,7 @@ class Ambrogio extends IPSModule
 								
 				}
 
-	  private function updateMap()
+	  public function updateMap()
     {
 			//declare(strict_types=1);
 // koordinaten aus robot_state
@@ -320,7 +320,7 @@ $paths[] = [
 ];
 
 $map['paths'] = $paths;
-
+echo($this->ReadPropertyString("MapID"));
 $url = GoogleMaps_GenerateStaticMap($this->ReadPropertyString("MapID"), json_encode($map));
 
 $html = '<img width="1024", height="500" src="' . $url . '" />';
