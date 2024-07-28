@@ -219,7 +219,7 @@ class Ambrogio extends IPSModule
 				public function TimerEvent()
 				{
 								$return = $this->updateAmbrogioStatus();
-								$return = decodeAmbrogioStatus($return);
+								$return = $this->decodeAmbrogioStatus($return);
 
 								echo "timer";
 
