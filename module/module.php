@@ -156,6 +156,10 @@ class Ambrogio extends IPSModule
             $key .
             '","message" : "UP"},"command" : "sms.send"}}';
         $result = $this->sendCloudMessage($jsonDataEncoded);
+
+	$returnUpdate = $this->updateAmbrogioStatus();
+        $this->decodeAmbrogioStatus($returnUpdate);
+	    
         return $result;
     }
 
