@@ -247,8 +247,8 @@ class Ambrogio extends IPSModule
     {
 			//declare(strict_types=1);
 // koordinaten aus robot_state
-$lat=this->ReadPropertyFloat("lat");
-$lng=this->ReadPropertyFloat("lgn");
+$lat=GetValueFloat(this->ReadPropertyFloat("lat"));
+$lng=GetValueFloat(this->ReadPropertyFloat("lgn"));
 
 $points = [
     ['lat' => $lat, 'lng' => $lng]
