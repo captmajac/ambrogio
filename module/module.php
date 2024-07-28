@@ -320,7 +320,7 @@ $paths[] = [
 ];
 
 $map['paths'] = $paths;
-echo($this->ReadPropertyString("MapID"));
+echo($this->GetIDForIdent("Map"));
 $url = GoogleMaps_GenerateStaticMap($this->ReadPropertyString("MapID"), json_encode($map));
 
 $html = '<img width="1024", height="500" src="' . $url . '" />';
