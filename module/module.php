@@ -48,7 +48,7 @@ class Ambrogio extends IPSModule
             40
         );
         $this->RegisterVariableFloat("lat", "lat", "", 50);
-        $this->RegisterVariableFloat("lgn", "lgn", "", 60);
+        $this->RegisterVariableFloat("lng", "lng", "", 60);
         $this->RegisterVariableString("Map", "Letzte Position", "~HTMLBox", 70);
 
         // update timer
@@ -92,7 +92,7 @@ class Ambrogio extends IPSModule
         $since = $result->thing_find->params->alarms->robot_state->since;
         // lat, lgn
         $lat = 0; // todo: alten wert holen
-        $lgn = 0; // todo: alten wert holen
+        $lng = 0; // todo: alten wert holen
         if (
             property_exists(
                 $result->thing_find->params->loc,
@@ -104,14 +104,14 @@ class Ambrogio extends IPSModule
         if (
             property_exists(
                 $result->thing_find->params->loc,
-                "lgn"
+                "lng"
             ) == true
         ) {
-            $lgn = $result->thing_find->params->loc->lgn;
+            $lng = $result->thing_find->params->loc->lng;
         }
 
-				$lat = $result->thing_find->params->loc->lat;
-			$lgn = $result->thing_find->params->loc->lgn;
+	echo ( $result->thing_find->params->loc->lat );
+	echo ( $result->thing_find->params->loc->lng );
 			
         // set vars
         SetValue($this->GetIDForIdent("CloudConnected"), $online);
@@ -124,7 +124,7 @@ class Ambrogio extends IPSModule
         SetValue($this->GetIDForIdent("State"), $state);
         SetValue($this->GetIDForIdent("Message"), $msg);
         SetValue($this->GetIDForIdent("lat"), $lat);
-        SetValue($this->GetIDForIdent("lgn"), $lgn);
+        SetValue($this->GetIDForIdent("lng"), $lng);
 
 				if ($this->ReadPropertyString("MapID") != "")
 				{
