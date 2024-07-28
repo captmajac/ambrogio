@@ -325,7 +325,7 @@ $url = GoogleMaps_GenerateStaticMap($this->ReadPropertyString("MapID"), json_enc
 
 $html = '<img width="1024", height="500" src="' . $url . '" />';
 
-SetValue($this->GetIDForIdent("State"), $html);
+SetValue($this->GetIDForIdent("Map"), $html);
 		}
 	
 	  private function CreateVarProfileModus()
