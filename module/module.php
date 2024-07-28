@@ -55,7 +55,8 @@ class Ambrogio extends IPSModule
 				{
 								$result = json_decode($json);
 								//cloud state
-								$online = $result-- > thing_find
+								$online = $result
+                        -> thing_find
 												->params->connected;
 								// message
 								$msg = $result
@@ -222,7 +223,7 @@ class Ambrogio extends IPSModule
 				public function TimerEvent()
 				{
 								$return = $this->updateAmbrogioStatus();
-								$return = $this->decodeAmbrogioStatus($return);
+								$this->decodeAmbrogioStatus($return);
 
 								echo "timer";
 
