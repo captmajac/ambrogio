@@ -99,7 +99,7 @@ class Ambrogio extends IPSModule
                 "lat"
             ) == true
         ) {
-            $lat = $jar->thing_find->params->loc->lat;
+            $lat = $result->thing_find->params->loc->lat;
         }
         if (
             property_exists(
@@ -107,11 +107,11 @@ class Ambrogio extends IPSModule
                 "lgn"
             ) == true
         ) {
-            $lgn = $jar->thing_find->params->loc->lgn;
+            $lgn = $result->thing_find->params->loc->lgn;
         }
 
-				$lat = $jar->thing_find->params->loc->lat;
-			$lgn = $jar->thing_find->params->loc->lgn;
+				$lat = $result->thing_find->params->loc->lat;
+			$lgn = $result->thing_find->params->loc->lgn;
 			
         // set vars
         SetValue($this->GetIDForIdent("CloudConnected"), $online);
