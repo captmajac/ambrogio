@@ -95,19 +95,19 @@ class Ambrogio extends IPSModule
         $lgn = 0; // todo: alten wert holen
         if (
             property_exists(
-                $result->thing_find->params->alarms->robot_state,
+                $result->thing_find->params->loc,
                 "lat"
             ) == true
         ) {
-            $lat = $jar->thing_find->params->alarms->robot_state->lat;
+            $lat = $jar->thing_find->params->loc->lat;
         }
         if (
             property_exists(
-                $result->thing_find->params->alarms->robot_state,
+                $result->thing_find->params->loc,
                 "lgn"
             ) == true
         ) {
-            $lgn = $jar->thing_find->params->alarms->robot_state->lgn;
+            $lgn = $jar->thing_find->params->loc->lgn;
         }
 
         // set vars
