@@ -110,8 +110,8 @@ class Ambrogio extends IPSModule
             $lng = $result->thing_find->params->loc->lng;
         }
 
-	echo ( $result->thing_find->params->loc->lat );
-	echo ( $result->thing_find->params->loc->lng );
+	print_r ( $result->thing_find->params->loc->lat );
+	print_r ( $result->thing_find->params->loc->lng );
 			
         // set vars
         SetValue($this->GetIDForIdent("CloudConnected"), $online);
