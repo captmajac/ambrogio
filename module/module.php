@@ -12,7 +12,7 @@ class Ambrogio extends IPSModule
         //$this->RegisterPropertyString ( "SessionID", "" );
         $this->SetBuffer("sessionid", "");
         $this->RegisterPropertyString("Interval", "300");
-        $this->RegisterPropertyInteger("MapID", "");
+        $this->RegisterPropertyString("MapID", "");
 
         $Module = json_decode(
             file_get_contents(__DIR__ . "/module.json"),
