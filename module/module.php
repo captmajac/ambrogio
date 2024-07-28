@@ -57,6 +57,15 @@ class Ambrogio extends IPSModule
             $Interval = 5 * 60 * 1000;
         }
         $this->SetTimerInterval("UpdateTimer", $Interval);
+
+    	if ($this->ReadPropertyString("MapID") != "")
+	{
+		IPS_SetHidden($this->GetIDForIdent("Map"),false);
+	}
+	else
+	{
+		IPS_SetHidden($this->GetIDForIdent("Map"),true);
+	}
     }
 
     // public update status
