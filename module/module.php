@@ -82,6 +82,9 @@ class Ambrogio extends IPSModule
     public function decodeAmbrogioStatus(string $json)
     {
         $result = json_decode($json);
+
+	IPS_LogMessage("Ambrogio","result=".$result);    
+	    
         //cloud state
         $online = $result->thing_find->params->connected;
         // message, muss nicht immer vorkommen
