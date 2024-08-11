@@ -274,11 +274,20 @@ class Ambrogio extends IPSModule
     {
         $return = $this->updateAmbrogioStatus();
 	$result = json_decode($return);
-	if ($result->success == "false")
-		IPS_LogMessage("Ambrogio","Fehler beim Cloud auslesen. ".$return);
-	else
-	        $this->decodeAmbrogioStatus($return);
 
+	 if (
+            property_exists(
+                $result,
+                "success"
+            ) == true
+        ) {
+            if ($result->success == "false")
+		IPS_LogMessage("Ambrogio","Fehler beim Cloud auslesen. ".$return);
+        }
+	else
+	 {
+		$this->decodeAmbrogioStatus($return);
+	 }
         //echo "timer ambrogio";
 
         // neu setzen
