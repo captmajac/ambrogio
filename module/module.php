@@ -147,12 +147,14 @@ class Ambrogio extends IPSModule
 		// login fehler
 		IPS_LogMessage("Ambrogio","Login/Session Fehler".$result);
 	}
-	    
-        // store sessionid
-        $this->SetBuffer(
-            "sessionid",
-            $obj->{'auth'}->{'params'}->{'sessionId'}
-        );
+	else
+	{   
+	        // store sessionid
+	        $this->SetBuffer(
+	            "sessionid",
+	            $obj->{'auth'}->{'params'}->{'sessionId'}
+	        );
+	}
     }
 
     // send go online message
