@@ -139,6 +139,12 @@ class Ambrogio extends IPSModule
             '{"auth":{"command":"api.authenticate","params":{"appId":"3c1Pt1We9dT3qBAlL7nxAcDERC82","thingKey":"3c1Pt1We9dT3qBAlL7nxAcDERC82","appToken":"DJMYYngGNEit40vA"}}}';
         $result = $this->sendCloudMessage($jsonDataEncoded);
         $obj = json_decode($result);
+	if ($obj == null)
+	{
+		// login fehler
+		IPS_LogMessage("Ambrogio","Login/Session Fehler".$result)
+	}
+	    
         // store sessionid
         $this->SetBuffer(
             "sessionid",
