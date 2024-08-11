@@ -142,7 +142,7 @@ class Ambrogio extends IPSModule
 	if ($obj == null)
 	{
 		// login fehler
-		IPS_LogMessage("Ambrogio","Login/Session Fehler".$result)
+		IPS_LogMessage("Ambrogio","Login/Session Fehler".$result);
 	}
 	    
         // store sessionid
@@ -188,10 +188,12 @@ class Ambrogio extends IPSModule
     // send cloud message
     private function sendCloudMessage($data)
     {
+	    
         $user = $this->ReadPropertyString("User");
         $pass = $this->ReadPropertyString("Pass");
         $key = $this->ReadPropertyString("ThingKey");
         $sessionid = $this->GetBuffer("sessionid");
+	
         $jsonDataEncoded = $data;
 
         //The URL you're sending the request to.
