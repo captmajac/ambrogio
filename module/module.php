@@ -268,7 +268,11 @@ class Ambrogio extends IPSModule
     public function TimerEvent()
     {
         $return = $this->updateAmbrogioStatus();
-        $this->decodeAmbrogioStatus($return);
+	$result = json_decode($return);
+	if ($result->success == "false")
+		IPS_LogMessage("Ambrogio","Fehler beim Cloud auslesen. ".$return);
+	else
+	        $this->decodeAmbrogioStatus($return);
 
         //echo "timer ambrogio";
 
