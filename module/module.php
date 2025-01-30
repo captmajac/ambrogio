@@ -275,6 +275,8 @@ class Ambrogio extends IPSModule
         $return = $this->updateAmbrogioStatus();
 	$result = json_decode($return);
 
+	if ($result != null)
+	{
 	 if (
             property_exists(
                 $result,
@@ -288,6 +290,7 @@ class Ambrogio extends IPSModule
 	 {
 		$this->decodeAmbrogioStatus($return);
 	 }
+	}
         //echo "timer ambrogio";
 
         // neu setzen
