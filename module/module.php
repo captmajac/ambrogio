@@ -204,7 +204,7 @@ class Ambrogio extends IPSModule
         $jsonDataEncoded = $data;
 
         //The URL you're sending the request to.
-        $url = "http://api-de.devicewise.com/api";
+        $url = "https://api-de.devicewise.com/api";
 
         //Create a cURL handle.
         $ch = curl_init($url);
@@ -245,7 +245,7 @@ class Ambrogio extends IPSModule
         $result = curl_exec($ch);
         curl_close($ch);
 
-        //echo $result."\n";
+        echo $result."\n";
         //$obj = json_decode($result);
         /* auf erfolgreich bzw. auth header prüfen
 								if ($obj->{'errorCodes'}[0] = -99999 )
