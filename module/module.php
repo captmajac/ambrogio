@@ -9,6 +9,7 @@ class Ambrogio extends IPSModule
         $this->RegisterPropertyString("User", "");
         $this->RegisterPropertyString("Pass", "");
         $this->RegisterPropertyString("ThingKey", "");
+	$this->RegisterPropertyString("AppID", "");
         //$this->RegisterPropertyString ( "SessionID", "" );
         $this->SetBuffer("sessionid", "");
         $this->RegisterPropertyString("Interval", "300");
@@ -138,8 +139,9 @@ class Ambrogio extends IPSModule
     // login cloud
     private function loginCloud()
     {
+	$appid = $this->ReadPropertyString("AppID");
         $jsonDataEncoded =
-            '{"auth":{"command":"api.authenticate","params":{"appId":"3c1Pt1We9dT3qBAlL7nxAcDERC82","thingKey":"3c1Pt1We9dT3qBAlL7nxAcDERC82","appToken":"DJMYYngGNEit40vA"}}}';
+            '{"auth":{"command":"api.authenticate","params":{"appId":"'.$appid.'","thingKey":"'.$appid.'","appToken":"DJMYYngGNEit40vA"}}}';
         $result = $this->sendCloudMessage($jsonDataEncoded);
         $obj = json_decode($result);
 	if ($obj == null)
