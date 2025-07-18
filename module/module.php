@@ -245,7 +245,7 @@ class Ambrogio extends IPSModule
         $result = curl_exec($ch);
         curl_close($ch);
 
-        echo $result."\n";
+        //echo $result."\n";
         //$obj = json_decode($result);
         /* auf erfolgreich bzw. auth header prüfen
 								if ($obj->{'errorCodes'}[0] = -99999 )
