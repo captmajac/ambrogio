@@ -52,6 +52,7 @@ class Ambrogio extends IPSModule
         );
         $this->RegisterVariableFloat("lat", "lat", "", 50);
         $this->RegisterVariableFloat("lng", "lng", "", 60);
+	    
         $this->RegisterVariableString("Map", "Letzte Position", "~HTMLBox", 70);
 
         // update timer
