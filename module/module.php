@@ -98,23 +98,27 @@ class Ambrogio extends IPSModule
         // since
         $since = $result->thing_find->params->alarms->robot_state->since;
         // lat, lgn
-        $lat = 0; // todo: alten wert holen
-        $lng = 0; // todo: alten wert holen
+        $lat = GetValue($this->GetIDForIdent("lat"); 
+        $lng = GetValue($this->GetIDForIdent("lng"); 
+	    // old: $result->thing_find->params->loc->lat
+	    // old: $result->thing_find->params->loc->lng
+	    // new: $result->thing_find->params->alarms->robot_state->lat
+	    // new: $result->thing_find->params->alarms->robot_state->lng
         if (
             property_exists(
-                $result->thing_find->params->loc,
+                $result->thing_find->params->alarms->robot_state,
                 "lat"
             ) == true
         ) {
-            $lat = $result->thing_find->params->loc->lat;
+            $lat = $result->thing_find->params->alarms->robot_state->lat;
         }
         if (
             property_exists(
-                $result->thing_find->params->loc,
+                $result->thing_find->params->alarms->robot_state,
                 "lng"
             ) == true
         ) {
-            $lng = $result->thing_find->params->loc->lng;
+            $lng = $result->thing_find->params->alarms->robot_state->lng;
         }
 
 	//print_r ( $result->thing_find->params->loc->lat );
@@ -170,19 +174,55 @@ class Ambrogio extends IPSModule
     {
         // noch prüfen ob login erforderlich, session id vorliegt oder ob der user sich selbst drum kümmern soll
         $key = $this->ReadPropertyString("ThingKey");
-        $jsonDataEncoded =
+        /*$jsonDataEncoded =
             '{"0" : {"params" : {"coding" : "SEVEN_BIT", "imei" : "' .
             $key .
-            '","message" : "UP"},"command" : "sms.send"}}';
-        $result = $this->sendCloudMessage($jsonDataEncoded);
+            '","message" : "START"},"command" : "sms.send"}}';*/
+
+	$wakeUpData = [
+        'wakeup' => [
+            'command' => 'sms.send',
+            'params' => [
+                'imei' => $robotIMEI,
+                'message' => 'START',
+                'coding' => 'SEVEN_BIT'
+            		]
+        	]
+    	];
 	    
-	IPS_Sleep(2 * 1000);
+        $result = $this->sendCloudMessage($wakeUpData);
+	    
+	IPS_Sleep(30 * 1000);
 	$returnUpdate = $this->updateAmbrogioStatus();
         $this->decodeAmbrogioStatus($returnUpdate);
 	    
         return $result;
     }
 
+    // work command
+    public function worknow()
+    {	
+	 this->goOnline();		// first go online command
+	    
+	 $key = $this->ReadPropertyString("ThingKey");   
+	 $commandData = [
+	        'mow_command' => [
+	            'command' => 'method.exec',
+	            'params' => [
+	                'thingKey' => $key,
+	                'method' => 'work_now'              // oder "pause" senden für unterbrechen? oder work_now
+	            ]
+	        ]
+	    ];
+	$result = $this->sendCloudMessage($commandData); 
+	
+	IPS_Sleep(5 * 1000);
+	$returnUpdate = $this->updateAmbrogioStatus();
+        $this->decodeAmbrogioStatus($returnUpdate);
+	    
+        return $result;    
+    }
+	
     // send getStatus message
     private function getRobotStatus()
     {
