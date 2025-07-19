@@ -202,7 +202,7 @@ class Ambrogio extends IPSModule
     // work command
     public function worknow()
     {	
-	 this->goOnline();		// first go online command
+	 $this->goOnline();		// first go online command
 	    
 	 $key = $this->ReadPropertyString("ThingKey");   
 	 $commandData = [
