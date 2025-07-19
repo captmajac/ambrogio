@@ -14,6 +14,8 @@ class Ambrogio extends IPSModule
         $this->SetBuffer("sessionid", "");
         $this->RegisterPropertyString("Interval", "300");
         $this->RegisterPropertyString("MapID", "");
+	$this->RegisterPropertyString("Latitude", "0");
+	$this->RegisterPropertyString("Longitude", "0");
 
         $Module = json_decode(
             file_get_contents(__DIR__ . "/module.json"),
@@ -127,6 +129,9 @@ class Ambrogio extends IPSModule
 
         SetValue($this->GetIDForIdent("State"), $state);
         SetValue($this->GetIDForIdent("Message"), $msg);
+	// lat und log korrektur?
+	$lat = $lat + $this->ReadPropertyFloat("Latitude");
+	$lng = $lng + $this->ReadPropertyFloat("Longitude");
         SetValue($this->GetIDForIdent("lat"), $lat);
         SetValue($this->GetIDForIdent("lng"), $lng);
 
@@ -323,8 +328,8 @@ class Ambrogio extends IPSModule
         $map["restrict_points"] = false; // Anzahl der Punkte beschränken auf die zulässige Größe der URL
         $map["skip_points"] = 1; // nur jeden x'ten Punkt ausgeben, GoogleMap interpoliert
 
-        $lat = GetValueFloat($this->GetIDForIdent("lat")); // static 52.37022400954993;
-        $lng = GetValueFloat($this->GetIDForIdent("lng")); // static 9.965405454556125;
+        $lat = GetValueFloat($this->GetIDForIdent("lat")); 
+        $lng = GetValueFloat($this->GetIDForIdent("lng")); 
 
         $center = [["lat" => $lat, "lng" => $lng]];
 
