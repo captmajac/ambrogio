@@ -6,6 +6,8 @@
 		{ "name": "User", "type": "ValidationTextBox", "caption": "Cloud Username:"},
 		{ "name": "Pass", "type": "PasswordTextBox", "caption": "Cloud Password:"},
 		{ "name": "Interval", "type": "ValidationTextBox", "caption": "Update Zyklus (Sek):", "validate":"[0-9]" },
-		{ "type": "ValidationTextBox", "name": "MapID", "caption": "Google Map Modul" }
+		{ "type": "ValidationTextBox", "name": "MapID", "caption": "Google Map Modul" },
+		{ "type": "NumberSpinner", "Name": "Latitude", "caption": "Latitude fix", "digits": 6},
+		{ "type": "NumberSpinner", "Name": "Longitude", "caption": "Longitude fix", "digits": 6}
 	]
 }
