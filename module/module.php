@@ -14,8 +14,8 @@ class Ambrogio extends IPSModule
         $this->SetBuffer("sessionid", "");
         $this->RegisterPropertyString("Interval", "300");
         $this->RegisterPropertyString("MapID", "");
-	$this->RegisterPropertyFloat("Latitude", "0");
-	$this->RegisterPropertyFloat("Longitude", "0");
+	$this->RegisterPropertyFloat("LatFix", 0.0);
+	$this->RegisterPropertyFloat("LngFix", 0.0);
 
         $Module = json_decode(
             file_get_contents(__DIR__ . "/module.json"),
@@ -130,8 +130,8 @@ class Ambrogio extends IPSModule
         SetValue($this->GetIDForIdent("State"), $state);
         SetValue($this->GetIDForIdent("Message"), $msg);
 	// lat und log korrektur?
-	$lat = $lat + $this->ReadPropertyFloat("Latitude");
-	$lng = $lng + $this->ReadPropertyFloat("Longitude");
+	$lat = $lat + $this->ReadPropertyFloat("LatFix");
+	$lng = $lng + $this->ReadPropertyFloat("LngFix");
         SetValue($this->GetIDForIdent("lat"), $lat);
         SetValue($this->GetIDForIdent("lng"), $lng);
 
