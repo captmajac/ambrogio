@@ -183,7 +183,7 @@ class Ambrogio extends IPSModule
         'wakeup' => [
             'command' => 'sms.send',
             'params' => [
-                'imei' => $robotIMEI,
+                'imei' => $key,
                 'message' => 'START',
                 'coding' => 'SEVEN_BIT'
             		]
