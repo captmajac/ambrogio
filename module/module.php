@@ -190,7 +190,7 @@ class Ambrogio extends IPSModule
         	]
     	];
 	    
-        $result = $this->sendCloudMessage($wakeUpData);
+        $result = $this->sendCloudMessage(json_encode($wakeUpData));
 	    
 	IPS_Sleep(30 * 1000);
 	$returnUpdate = $this->updateAmbrogioStatus();
@@ -214,7 +214,7 @@ class Ambrogio extends IPSModule
 	            ]
 	        ]
 	    ];
-	$result = $this->sendCloudMessage($commandData); 
+	$result = $this->sendCloudMessage(json_encode($commandData)); 
 	
 	IPS_Sleep(5 * 1000);
 	$returnUpdate = $this->updateAmbrogioStatus();
