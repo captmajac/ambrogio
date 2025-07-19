@@ -98,8 +98,8 @@ class Ambrogio extends IPSModule
         // since
         $since = $result->thing_find->params->alarms->robot_state->since;
         // lat, lgn
-        $lat = GetValue($this->GetIDForIdent("lat"); 
-        $lng = GetValue($this->GetIDForIdent("lng"); 
+        $lat = GetValue($this->GetIDForIdent("lat")); 
+        $lng = GetValue($this->GetIDForIdent("lng")); 
 	    // old: $result->thing_find->params->loc->lat
 	    // old: $result->thing_find->params->loc->lng
 	    // new: $result->thing_find->params->alarms->robot_state->lat
